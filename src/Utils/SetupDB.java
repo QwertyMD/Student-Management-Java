@@ -9,6 +9,7 @@ public class SetupDB {
         String dbName = "StudentManagement";
         String createDB = "CREATE DATABASE IF NOT EXISTS " + dbName;
         String useDB = "USE " + dbName;
+        
         String createStudentTable = "CREATE TABLE IF NOT EXISTS student (" +
                 "studentId INT AUTO_INCREMENT PRIMARY KEY," +
                 "name VARCHAR(100) NOT NULL," +
