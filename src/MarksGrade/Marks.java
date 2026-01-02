@@ -1,4 +1,4 @@
-package marks;
+package MarksGrade;
 
 public class Marks {
     private int marksId;

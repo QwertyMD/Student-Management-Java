@@ -1,4 +1,4 @@
-package marks;
+package MarksGrade;
 
 import java.sql.*;
 import java.util.ArrayList;
