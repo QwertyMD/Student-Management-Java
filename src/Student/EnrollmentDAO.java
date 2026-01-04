@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public class EnrollmentDAO {
-    boolean enrollStudent(int studentID, int courseID) {
+    public boolean enrollStudent(int studentID, int courseID) {
         try(Connection conn = DBConnection.getDbConnection()) {
             String sql = "INSERT INTO enrollments (student_id, course_id) VALUES (?, ?)";
             var pstmt = conn.prepareStatement(sql);
@@ -33,11 +33,11 @@ public class EnrollmentDAO {
             return false;
         }
     }
-    List<Course> getCoursesByStudent(int studentID){
+    public List<Course> getCoursesByStudent(int studentID){
         try(Connection conn = DBConnection.getDbConnection()) {
-            String sql = "SELECT c.course_id, c.course_name, c.credits " +
+            String sql = "SELECT c.courseId, c.courseName, c.credits " +
                          "FROM courses c " +
-                         "JOIN enrollments e ON c.course_id = e.course_id " +
+                         "JOIN enrollments e ON c.courseId = e.course_id " +
                          "WHERE e.student_id = ?";
             var pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, studentID);
@@ -45,8 +45,8 @@ public class EnrollmentDAO {
             List<Course> courses = new java.util.ArrayList<>();
             while (rs.next()){
                 Course course = new Course();
-                course.courseID = rs.getInt("course_id");
-                course.courseName = rs.getString("course_name");
+                course.courseID = rs.getInt("courseId");
+                course.courseName = rs.getString("courseName");
                 course.credits = rs.getInt("credits");
                 courses.add(course);
             }
