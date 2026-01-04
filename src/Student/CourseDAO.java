@@ -6,13 +6,13 @@ import java.sql.Connection;
 import java.util.List;
 
 public class CourseDAO {
-    boolean addCourse(Course course) {
+    public boolean addCourse(Course course) {
         try (Connection conn = DBConnection.getDbConnection()){
-            String sql = "INSERT INTO course (courseName, credits,courseId) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO courses (courseName, credits, courseId) VALUES (?, ?, ?)";
             var pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, course.getcourseName());
             pstmt.setInt(2, course.getcredits());
-            pstmt.setInt( 3, course.getcourseID());
+            pstmt.setInt(3, course.getcourseID());
 
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
@@ -23,7 +23,7 @@ public class CourseDAO {
     }
     boolean updateCourse(Course course){
         try(Connection conn = DBConnection.getDbConnection()){
-            String sql = "UPDATE course SET courseName = ?, credits = ? WHERE courseId = ?";
+            String sql = "UPDATE courses SET courseName = ?, credits = ? WHERE courseId = ?";
             var pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, course.getcourseName());
             pstmt.setInt(2, course.getcredits());
@@ -38,7 +38,7 @@ public class CourseDAO {
 
     boolean deleteCourse(int courseID){
         try(Connection conn = DBConnection.getDbConnection()){
-            String sql = "DELETE FROM course WHERE courseId = ?";
+            String sql = "DELETE FROM courses WHERE courseId = ?";
             var pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, courseID);
             int rowsAffected = pstmt.executeUpdate();
@@ -49,9 +49,9 @@ public class CourseDAO {
         }
     }
 
-    List<Course> getAllCourses(){
+    public List<Course> getAllCourses(){
         try(Connection conn= DBConnection.getDbConnection()){
-            String sql = "SELECT * FROM course";
+            String sql = "SELECT * FROM courses";
             var pstmt = conn.prepareStatement(sql);
             var rs = pstmt.executeQuery();
             List<Course> courses = new java.util.ArrayList<>();

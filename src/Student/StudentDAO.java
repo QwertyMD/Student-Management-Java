@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAO {
-    boolean addStudent(Student student) {
+    public boolean addStudent(Student student) {
         try (Connection conn = DBConnection.getDbConnection()) {
             String sql = "INSERT INTO student (name, rollNo, email,studentId) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class StudentDAO {
         return null;
     }
 
-    List<Student> getAllStudents() {
+    public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         try (Connection conn = DBConnection.getDbConnection()) {
             String sql = "SELECT * FROM student";
